@@ -1,0 +1,25 @@
+services:
+  backend:
+    build: ./app
+    container_name: calendar-backend
+    command: python -m flask --app app.py run --host=0.0.0.0 --port=5000
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=development
+      - FLASK_APP=app.py
+    volumes:
+      - ./app:/app
+    working_dir: /app
+  frontend:
+    build: ./web
+    container_name: calendar-frontend
+    command: npm run dev -- --host 0.0.0.0 --port 5173 --strictPort
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./web:/web
+      - /web/node_modules
+    working_dir: /web
+    tty: true
+    stdin_open: true
