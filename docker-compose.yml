@@ -2,15 +2,15 @@ services:
   backend:
     build: ./app
     container_name: calendar-backend
-    command: python -m flask --app app.py run --host=0.0.0.0 --port=5000
+    command: uvicorn app:app --host 0.0.0.0 --port 8000 --reload
     ports:
-      - "5000:5000"
+      - "8000:8000"
     environment:
-      - FLASK_ENV=development
-      - FLASK_APP=app.py
+      - ENV=development
     volumes:
       - ./app:/app
     working_dir: /app
+
   frontend:
     build: ./web
     container_name: calendar-frontend

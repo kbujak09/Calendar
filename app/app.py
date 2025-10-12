@@ -1,10 +1,8 @@
-from flask import Flask
+from fastapi import FastAPI
+from models.calendar import Calendar
 
-app = Flask(__name__)
+app = FastAPI()
 
-@app.route("/")
-def hello_world():
-  return "<p>Hello World!</p>"
-
-if __name__ == "__main__":
-    app.run(debug=True)
+@app.get("/", response_model=Calendar)
+def read_root():
+  return Calendar(id=1, name="Main Calendar")
