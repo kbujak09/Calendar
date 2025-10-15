@@ -1,8 +1,14 @@
 from fastapi import FastAPI
-from models.calendar import Calendar
+from schemas.calendar import CalendarResponse
+from uuid import uuid4
 
 app = FastAPI()
 
-@app.get("/", response_model=Calendar)
+@app.get("/", response_model=CalendarResponse)
 def read_root():
-  return Calendar(id=1, name="Main Calendar")
+    return CalendarResponse(
+        id=uuid4(),
+        owner_id=uuid4(),
+        name="Mój kalendarz",
+        timezone="Europe/Warsaw",
+    )
