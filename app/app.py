@@ -8,7 +8,5 @@ app = FastAPI()
 def read_root():
     return CalendarResponse(
         id=uuid4(),
-        owner_id=uuid4(),
-        name="Mój kalendarz",
-        timezone="Europe/Warsaw",
+        owner_id=uuid4()
     )
